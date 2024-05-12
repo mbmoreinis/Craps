@@ -6,6 +6,7 @@ var roll = document.getElementById("roll");
 var dicebox = document.getElementById("dicebox");
 var dice1 = document.getElementById("dice1");
 var dice2 = document.getElementById("dice2");
+var comeoutRemind = document.getElementById("come-out");
 let d1 = 0;
 let d2 = 0;
 var gameStatus = 0;
@@ -144,6 +145,8 @@ function rollComeout(){
     }
     else {
       caller(comeOut, 3);
+      comeoutRemind.style.display = "inline";
+      comeoutRemind.innerHTML = "You're rolling for a "+comeOut;
       come.style.display = "hide";
       point.style.display = "inline";
       come.style.display = "none";

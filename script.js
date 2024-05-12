@@ -6,29 +6,46 @@ var roll = document.getElementById("roll");
 var dicebox = document.getElementById("dicebox");
 var dice1 = document.getElementById("dice1");
 var dice2 = document.getElementById("dice2");
-var comeoutRemind = document.getElementById("come-out");
+var comeOutBet = document.getElementById("come-out");
 var bettypebox = document.getElementById("bettypebox");
+var betting = document.getElementById("betting");
+var sideBetting = document.getElementById("side-betting");
 var sidebets = document.getElementById("sidebets");
+var bettingAmount = document.getElementById("b-amount");
+var bettingType = document.getElementById("b-type");
+var sideAmount = document.getElementById("sb-amount");
+var sideType = document.getElementById("sb-type");
 let d1 = 0;
 let d2 = 0;
 var gameStatus = 0;
 var comeOut = 0;
 var balance = 0;
 var bet = 0;
+var sidebet = 0;
+var comebet = 0;
 var betType = "none;"
 var total = 0;
 var balanceDisplay = document.getElementById("balance-display");
 var totalBet = document.getElementById("total-bet");
 balanceDisplay.innerHTML = "$ " + balance;
 var moneyBet = document.getElementById("moneyBet");
-var betType = "Pass";
-let type = document.getElementById("bettypebox");
-type.selectedIndex = 2;
-var betType = type.value;
-type.addEventListener('change', function() {
+bettypebox.selectedIndex = 2;
+var betType = bettypebox.value;
+bettypebox.addEventListener('change', function() {
   let betType =  this.value;
 });
 populateSidebets();
+
+function populateSidebets(){
+  let types = ["None","Big 6","Big Red","Big 8","Boxcars","Field","Hard Way","Horn","Lay","Snake Eyes","Yo"];
+  for (let index = 0; index < types.length; index ++){
+    let newSide = document.createElement("option");
+    newSide.value = types[index];
+    newSide.innerHTML = types[index];
+    sidebets.appendChild(newSide);
+  }
+}
+
 
 /* PLAY CRAPS: playCraps() runs a craps game.
  * @param: none
@@ -53,15 +70,26 @@ function playCraps(){
  * @return: none;
  */
 function newGame(){
+  bettypebox.selectedIndex = 2;
+  sidebets.selectedIndex = 0;
   total = 0;
   bet = 0;
-  totalBet.value = total+bet;
-  moneyBet.value = bet;
+  sidebet = 0;
+  comebet = 0;
+  comeOutBet.style.display="none";
+  betting.style.display = "none";
+  bettingType.innerHTML = "";
+  bettingAmount.innerHTML = "";
+  sideBetting.style.display = "none";
+  sideType.innerHTML = "";
+  sideAmount.innerHTML = "";
   play.style.display="inline";
   come.style.display="none";
   point.style.display = "none";
   dice1.innerHTML = "*";
   dice2.innerHTML = "*";
+  console.log("Newgame called");
+  refreshBoard();
 }
 
 
@@ -107,14 +135,12 @@ function caller(roller, outcome){
     message += ". You won!";
     balance += total*2;
     roll.innerHTML = message;
-    refreshBoard();
     newGame(); 
   }
   else if (outcome == 2) {
     if (balance > 0) {
       message += ". You lost!";
       roll.innerHTML = message;
-      refreshBoard();
       newGame();
     }
     else {
@@ -148,8 +174,8 @@ function rollComeout(){
     }
     else {
       caller(comeOut, 3);
-      comeoutRemind.style.display = "inline";
-      comeoutRemind.innerHTML = "You're rolling for a "+comeOut;
+      comeOutBet.style.display = "inline";
+      comeOutBet.innerHTML = "<strong>Bet of $</strong>" + total + " on point roll of: "+comeOut+".<br>";
       come.style.display = "hide";
       point.style.display = "inline";
       come.style.display = "none";
@@ -157,15 +183,24 @@ function rollComeout(){
     bet=0;
     moneyBet.value = 0;
   }
-  type.selectedIndex = 0;
-  var betType = type.value;
+  bettypebox.selectedIndex = 0;
+  var betType = bettypebox.value;
 }
 
-function readSide(id){
-  let e = document.getElementById(id);
-  let value = e.value;
-  let text = e.options[e.selectedIndex].text;
-  alert("Value is "+ value +" and label is "+ text);
+function readSide(id, bet, bettype){
+  console.log("Reading id "+ id + " type "+ bettype);
+  if (bettype == 1) {
+    let text = bettypebox.options[bettypebox.selectedIndex].text;
+    betting.style.display = "inline";
+    bettingType.innerHTML = text;
+    bettingAmount.innerHTML = comebet;
+  }
+  else if (bettype == 2){
+     let text = sidebets.options[sidebets.selectedIndex].text;
+     sideBetting.style.display = "inline";
+     sideType.innerHTML = text;
+     sideAmount.innerHTML = sidebet;
+  } 
 }
 /* TAKE BET: pull bet value from moneyBet
  * Update bet with integer converted value
@@ -173,11 +208,26 @@ function readSide(id){
  * @return none
  */
 function takeBet() {
-  if (total == 0) gameStatus = 1;
-  readSide("bettypebox");
-  readSide("sidebets");
   let toBet = moneyBet.value;
   let bet = parseInt(toBet);
+  if (total == 0) gameStatus = 1;
+  let betType = bettypebox.options[bettypebox.selectedIndex].text;
+  if (betType != "Pass" && betType != "Come"){
+    betting.style.display = "inline";
+    let comebetcash = moneyBet.value;
+    comebet = parseInt(comebetcash);
+    readSide("bettypebox", comebet, 1);
+    console.log("Bet of " + comebet + " registered as " + betType);
+  }
+  let sideType = sidebets.options[sidebets.selectedIndex].text;
+  console.log("Checking "+ sideType + " not None");
+  if (sideType != "None"){
+     sideBetting.style.display = "inline";
+    let sidebetcash = moneyBet.value;
+    sidebet = parseInt(sidebetcash);
+    readSide("sidebets", sidebet, 2);
+    console.log("Sidebet of "+ sidebet + " registered as " + sideType);
+  }
   if (isNaN(bet)) {
     roll.innerHTML = "Bad Input.  Try Again.";
     bet = 0;
@@ -211,13 +261,3 @@ function rollPointroll(){
   }
 }
 
-function populateSidebets(){
-  let types = ["None","Big 6","Big Red","Big 8","Boxcars","Field","Hard Way","Horn","Lay","Snake Eyes","Yo"];
-  for (let index = 0; index < types.length; index ++){
-    let newSide = document.createElement("option");
-    newSide.value = types[index];
-    newSide.innerHTML = types[index];
-    sidebets.appendChild(newSide);
-  }
-  console.log("Side bets added.");
-}

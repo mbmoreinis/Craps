@@ -110,7 +110,7 @@ p {
 }
 
 #bettype {
-  top:-10px;
+  top:4px;
   position:relative;
 }
 
@@ -118,12 +118,12 @@ p {
   margin-bottom:10px;
 }
 
-#type, #sidetype {
+#bettypebox, #sidebets {
   width:75%;
   padding:3px;
 }
 
-#sidetype {
+#sidebets {
   margin:3px auto;
 }
 

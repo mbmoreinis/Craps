@@ -7,6 +7,8 @@ var dicebox = document.getElementById("dicebox");
 var dice1 = document.getElementById("dice1");
 var dice2 = document.getElementById("dice2");
 var comeoutRemind = document.getElementById("come-out");
+var bettypebox = document.getElementById("bettypebox");
+var sidebets = document.getElementById("sidebets");
 let d1 = 0;
 let d2 = 0;
 var gameStatus = 0;
@@ -26,6 +28,7 @@ var betType = type.value;
 type.addEventListener('change', function() {
   let betType =  this.value;
 });
+populateSidebets();
 
 /* PLAY CRAPS: playCraps() runs a craps game.
  * @param: none
@@ -158,7 +161,12 @@ function rollComeout(){
   var betType = type.value;
 }
 
-
+function readSide(id){
+  let e = document.getElementById(id);
+  let value = e.value;
+  let text = e.options[e.selectedIndex].text;
+  alert("Value is "+ value +" and label is "+ text);
+}
 /* TAKE BET: pull bet value from moneyBet
  * Update bet with integer converted value
  * @param: none
@@ -166,6 +174,8 @@ function rollComeout(){
  */
 function takeBet() {
   if (total == 0) gameStatus = 1;
+  readSide("bettypebox");
+  readSide("sidebets");
   let toBet = moneyBet.value;
   let bet = parseInt(toBet);
   if (isNaN(bet)) {
@@ -188,7 +198,6 @@ function takeBet() {
   }
 }
 
-
 function rollPointroll(){
   if (moneyBet.value != "0") {
     takeBet();
@@ -200,4 +209,15 @@ function rollPointroll(){
   else{
     caller(pointRoll, 3);
   }
+}
+
+function populateSidebets(){
+  let types = ["None","Big 6","Big Red","Big 8","Boxcars","Field","Hard Way","Horn","Lay","Snake Eyes","Yo"];
+  for (let index = 0; index < types.length; index ++){
+    let newSide = document.createElement("option");
+    newSide.value = types[index];
+    newSide.innerHTML = types[index];
+    sidebets.appendChild(newSide);
+  }
+  console.log("Side bets added.");
 }

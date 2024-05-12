@@ -1,0 +1,173 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+}
+
+#board {
+  height:100px;
+}
+#board p {
+  color:darkred;
+  display:none;
+}
+#board img {
+  padding-right:20px;
+}
+
+#buttons {
+  top:275px;
+  width:560px;
+  position:absolute;
+  text-align:center;
+}
+
+#buttons p {
+  display:inline!important;
+  font-size:15pt;
+  padding-left:5px;
+}
+
+#point, #come {
+  display:none;
+}
+
+button {
+  font-size:12pt;
+  padding:5px;
+  background-color:lightgreen;
+  width:100px;
+  border-radius:10px;
+}
+
+button:hover {
+  background-color:yellow;
+}
+
+#fullgame {
+  border: 3px solid black;
+  border-radius: 5px;
+  background-color: #99D3CC;
+  padding:20px 0 0px 20px;
+  width:570px;
+  margin:0 auto;
+}
+
+#top-row {
+}
+
+.box {
+  display:inline-block;
+  margin-right:20px;
+  width:150px;
+  height:120px;
+  border: 2px solid black;
+  text-align: center;
+  box-sizing: border-box;
+  padding-top:10px;
+  background-color:#ccc;
+}
+
+.inside-box {
+  border: 1px solid black;
+  width: 100px;
+  height: 25px;
+  background-color: white;
+  margin-left: 5px;
+  margin:0 auto;
+}
+
+input.inside-box, #type, #sidetype {
+  border-radius: 8px;
+}
+
+p {
+  margin-top: 0;
+  padding-top: 0;
+  font-size: 20px;
+}
+
+#moneyin, #bettype {
+  background-color: #E8E2C8;
+}
+
+#moneyin {
+  width: 200px;
+}
+
+
+#moneyin input {
+  text-align:right;
+  padding-right:5px;
+}
+
+#bottom-row .box {
+  margin-top:55px;
+  height:125px;
+  position:relative;
+}
+
+#bettype {
+  top:-10px;
+  position:relative;
+}
+
+#bettype p {
+  margin-bottom:10px;
+}
+
+#type, #sidetype {
+  width:75%;
+  padding:3px;
+}
+
+#sidetype {
+  margin:3px auto;
+}
+
+input[type="text"], select {
+  font-size:18px;
+  font-family:'Times New Roman', serif;
+}
+
+#betodds {
+  
+}
+
+
+#betodds p.box-title {
+  margin-bottom:10px;
+}
+
+#betodds p.inside-box  {
+  margin-bottom:5px!important;
+}
+
+#dicebox {
+  width: 200px;
+  top:-16px;
+}
+
+#dicebox p {
+  padding-bottom:5px;
+  margin-bottom:0px;
+}
+
+#dice1, #dice2 {
+  border: 1px solid black;
+  width: 62px;
+  height: 62px;
+  box-sizing:border-box;
+  background-color: white;
+  font-size: 22px;
+  font-weight:bold;
+  text-align: center;
+  display:inline-block;
+  padding-top:18px;
+}
+
+#dice1 {
+  margin-right:10px;
+}

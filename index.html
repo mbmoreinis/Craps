@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Craps Interface Quiz</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  
+ 
+  <div id="board">
+    <img align="left" src="craps.png" width="100">
+    <h2>Play Craps!</h2>
+    <p><strong>Side Bet:</strong><span id="amount"></span> <span id="type">none</span></p>
+  </div>
+
+  <div id ="fullgame">
+    <div id="buttons">
+      <button id="play" onclick="playCraps();">Play Craps</button>
+      <button id="come" onclick="rollComeout();">Come Out</button>
+      <button id="point" onclick="rollPointroll();">Point Roll</button>
+      <p id="roll">Play Craps! Click for $100. </p>
+    </div>
+    <div id="top-row">
+
+      <div id="moneyin" class="box">
+        <p>Money Bet</p>
+          <input type="text" id="moneyBet" class="inside-box" value=0>
+      </div> <!-- /moneyin -->
+      
+      <div id ="moneymade" class="box">
+        <p>Total Bet</p>
+        <div id ="moneymadebox" class="inside-box">
+          <p id="total-bet">0</p>
+        </div>
+      </div> <!-- /moneymade -->
+    
+      <div id ="moneywon" class="box">
+        <p>Balance</p>
+        <div class="inside-box">
+          <p id="balance-display">0</p>
+        </div>
+      </div> <!-- /moneywon -->
+      
+    </div> <!-- /top-row -->
+    <div id="bottom-row">
+
+     <!-- https://www.w3schools.com/tags/tag_select.asp --> 
+      <div id ="bettype" class="box">
+        <p><a href="https://www.lolcraps.com/craps/dictionary/"></a>Bet & Side?</a></p>
+        <form>
+          <select id="bettypebox">
+            <option value="opel" class="hide">Come</option>
+            <option class="hide" value="audi">Don't Come</option>
+            <option value="volvo">Pass</option>
+            <option value="saab">Don't Pass</option>
+          </select>
+        </form>
+        <form>
+          <select id="sidebettypebox">
+            <option value="audi">None</option>
+            <option value="audi">Big 6</option>
+            <option value="audi">Big Red</option>
+            <option value="audi">Big 8</option>
+            <option value="audi">Boxcars</option>
+            <option value="opel">Field</option>
+            <option value="audi">Hard Way</option>
+            <option value="audi">Horn</option>
+            <option value="audi">Lay</option>
+            <option value="saab">Snake Eyes</option>
+            <option value="saab">Yo</option>
+          </select>
+        </form>
+      </div> <!-- /bettypes -->
+      
+      <div id ="betodds" class="box">
+        <p class="box-title">Side & Payout</p>
+          <p class="inside-box" id="amount">0</p>
+          <p class="inside-box" id="payout">0:0</p>
+      </div> <!-- /betodds -->
+      
+      <div id="dicebox" class="box">
+        <p>Your Roll:</p>
+        <div id ="dice1">
+          *
+        </div>
+        <div id ="dice2">
+          *
+        </div>
+      </div> <!-- /dicebox -->
+      
+    </div> <!-- /bottom-row -->
+  </div> <!-- /fullgame -->
+ 
+</body>
+  <script src="script.js"></script>
+</html>

@@ -46,7 +46,6 @@ function populateSidebets(){
   }
 }
 
-
 /* PLAY CRAPS: playCraps() runs a craps game.
  * @param: none
  * @return: none;
@@ -62,7 +61,6 @@ function playCraps(){
   come.style.display="inline";
   roll.innerHTML = "Bet, then roll your comeout."
   if (balance > 0) play.innerHTML = "Play again?"
-  else fullGame.innerHTML = "Go home!  You're broke.";
 }
 
 /* NEW GAME: newGame() Refreshes board for new game 
@@ -110,7 +108,8 @@ function rollDice(die){
 function shoot(){
   d1 = rollDice(dice1);
   d2 = rollDice(dice2);
-  return d1 + d2;
+  let sum = d1 + d2;
+  return sum;
 }
 
 /* REFRESH BOARD: Update Balance and bet 
@@ -123,7 +122,6 @@ function refreshBoard(){
   totalBet.innerHTML = "0";
   bet = 0;
 }
-
 
 /* CALLER: caller() provides game feedback from parameters
  * @param roll, outcome (1=win, 2=lose, 3=roll again)
@@ -184,7 +182,6 @@ function rollComeout(){
     moneyBet.value = 0;
   }
   bettypebox.selectedIndex = 0;
-  var betType = bettypebox.value;
 }
 
 function readSide(id, bet, bettype){
@@ -260,4 +257,3 @@ function rollPointroll(){
     caller(pointRoll, 3);
   }
 }
-
